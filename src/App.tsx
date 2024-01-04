@@ -39,7 +39,7 @@ function App() {
       <BrowserRouter>
         <Navbar loggedIn={loggedIn} profilePhoto={profilePhoto} />
         <Routes>
-          <Route path="/World-News/" element={<HomePage />} />
+          <Route path="/Craft_Beers/" element={<HomePage />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginPage />} />
