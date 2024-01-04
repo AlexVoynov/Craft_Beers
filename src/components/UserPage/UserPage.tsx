@@ -83,7 +83,7 @@ const UserPage = ({ loggedIn, src }: UserPageProps) => {
                   <Button
                     onClick={() => signOut(auth)}
                     component="a"
-                    href="/"
+                    href="https//alexvoynov.github.io/Craft_Beers/"
                     size="small"
                     sx={{ ml: "1rem" }}
                   >

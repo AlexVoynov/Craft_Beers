@@ -45,7 +45,12 @@ const ProfilePhotoForm = () => {
         <Button type="submit" size="small" sx={{ ml: "1rem" }}>
           Send photo
         </Button>
-        <Button component="a" href="" size="small" sx={{ ml: "1rem" }}>
+        <Button
+          component="a"
+          href="https//alexvoynov.github.io/Craft_Beers/"
+          size="small"
+          sx={{ ml: "1rem" }}
+        >
           Upload photo
         </Button>
       </Typography>

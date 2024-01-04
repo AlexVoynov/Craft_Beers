@@ -39,15 +39,16 @@ function App() {
       <BrowserRouter>
         <Navbar loggedIn={loggedIn} profilePhoto={profilePhoto} />
         <Routes>
-          <Route path="/Craft_Beers/" element={<HomePage />} />
+          <Route
+            path="https//alexvoynov.github.io/Craft_Beers/"
+            element={<HomePage />}
+          />
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginPage />} />
           <Route
             path="/user"
-            element={
-              <UserPage src={profilePhoto} loggedIn={loggedIn} />
-            }
+            element={<UserPage src={profilePhoto} loggedIn={loggedIn} />}
           />
           <Route path="/search" element={<SearchPage />} />
           <Route path="/ecxercise" element={<ExcerciseForm />} />
