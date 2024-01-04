@@ -1,0 +1,60 @@
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar/Navbar";
+import HomePage from "./components/HomePage/HomePage";
+import RegisterForm from "./components/RegisterForm/RegisterForm";
+import LoginPage from "./components/LoginPage/LoginPage";
+import ExcerciseForm from "./components/ExcerciseForm/ExcerciseForm";
+import { onAuthStateChanged } from "firebase/auth";
+import UserPage from "./components/UserPage/UserPage";
+import SearchPage from "./components/SearchPage/SearchPage";
+import { ref, getDownloadURL } from "firebase/storage";
+import { auth, storage } from "./helpers/firebaseConfig";
+
+function App() {
+  
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setLoggedIn(true);
+    } else {
+      setLoggedIn(false);
+    }
+  });
+
+  const [profilePhoto, setProfilePhoto] = useState<string>("/");
+
+  useEffect(() => {
+    if (loggedIn && auth.currentUser) {
+      const storageRef = ref(storage, `/users/${auth.currentUser.uid}/profile`);
+      getDownloadURL(storageRef).then((url) => {
+        setProfilePhoto(url);
+      });
+    }
+  }, [loggedIn, profilePhoto]);
+
+  return (
+    <div className="App">
+      <BrowserRouter>
+        <Navbar loggedIn={loggedIn} profilePhoto={profilePhoto} />
+        <Routes>
+          <Route path="/World-News/" element={<HomePage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="/register" element={<RegisterForm />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/user"
+            element={
+              <UserPage src={profilePhoto} loggedIn={loggedIn} />
+            }
+          />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/ecxercise" element={<ExcerciseForm />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+export default App;
