@@ -47,7 +47,7 @@ const ProfilePhotoForm = () => {
         </Button>
         <Button
           component="a"
-          href="https//alexvoynov.github.io/Craft_Beers/"
+          href="/"
           size="small"
           sx={{ ml: "1rem" }}
         >
