@@ -47,7 +47,7 @@ const ProfilePhotoForm = () => {
         </Button>
         <Button
           component="a"
-          href="/"
+          href=""
           size="small"
           sx={{ ml: "1rem" }}
         >

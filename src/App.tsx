@@ -36,14 +36,14 @@ function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}>
         <Navbar loggedIn={loggedIn} profilePhoto={profilePhoto} />
         <Routes>
-          <Route
+          {/* <Route
             path="https//alexvoynov.github.io/Craft_Beers/"
             element={<HomePage />}
-          />
-          <Route path="/" element={<HomePage />} />
+          /> */}
+          <Route path="" element={<HomePage />} />
           <Route path="/register" element={<RegisterForm />} />
           <Route path="/login" element={<LoginPage />} />
           <Route
@@ -51,7 +51,7 @@ function App() {
             element={<UserPage src={profilePhoto} loggedIn={loggedIn} />}
           />
           <Route path="/search" element={<SearchPage />} />
-          <Route path="/ecxercise" element={<ExcerciseForm />} />
+          {/* <Route path="/ecxercise" element={<ExcerciseForm />} /> */}
         </Routes>
       </BrowserRouter>
     </div>
