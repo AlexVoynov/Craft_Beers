@@ -7,6 +7,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
+import HomePage from "../HomePage/HomePage";
 
 interface UserPageProps {
   loggedIn: boolean;
@@ -82,8 +83,8 @@ const UserPage = ({ loggedIn, src }: UserPageProps) => {
                   </Typography>
                   <Button
                     onClick={() => signOut(auth)}
-                    component="a"
-                    href=""
+                    // component="a"
+                    // href=""
                     size="small"
                     sx={{ ml: "1rem" }}
                   >

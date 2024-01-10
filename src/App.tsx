@@ -4,7 +4,6 @@ import Navbar from "./components/Navbar/Navbar";
 import HomePage from "./components/HomePage/HomePage";
 import RegisterForm from "./components/RegisterForm/RegisterForm";
 import LoginPage from "./components/LoginPage/LoginPage";
-import ExcerciseForm from "./components/ExcerciseForm/ExcerciseForm";
 import { onAuthStateChanged } from "firebase/auth";
 import UserPage from "./components/UserPage/UserPage";
 import SearchPage from "./components/SearchPage/SearchPage";
@@ -32,26 +31,24 @@ function App() {
         setProfilePhoto(url);
       });
     }
-  }, [loggedIn, profilePhoto]);
+  }, [loggedIn]);
 
   return (
     <div className="App">
       <BrowserRouter basename={`/${process.env.PUBLIC_URL}`}>
         <Navbar loggedIn={loggedIn} profilePhoto={profilePhoto} />
         <Routes>
-          {/* <Route
-            path="https//alexvoynov.github.io/Craft_Beers/"
-            element={<HomePage />}
-          /> */}
           <Route path="" element={<HomePage />} />
           <Route path="/register" element={<RegisterForm />} />
-          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/login"
+            element={<LoginPage src={profilePhoto} loggedIn={loggedIn} />}
+          />
           <Route
             path="/user"
             element={<UserPage src={profilePhoto} loggedIn={loggedIn} />}
           />
           <Route path="/search" element={<SearchPage />} />
-          {/* <Route path="/ecxercise" element={<ExcerciseForm />} /> */}
         </Routes>
       </BrowserRouter>
     </div>
