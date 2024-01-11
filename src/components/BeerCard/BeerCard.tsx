@@ -123,7 +123,7 @@ const BeerCard = ({ beer }: BeerCardProps) => {
   }
 
   return (
-    <ListItem>
+    <ListItem >
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
           avatar={
