@@ -1,40 +1,55 @@
 import { useForm } from "react-hook-form";
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Typography } from "@mui/material";
 
 interface SearchFormProps {
-  setKeyword: (value: string) => void;
+  setFood: (value: string) => void;
 }
 
 interface SearchFormValues {
-  keyword: string;
+  food: string;
 }
 
-const SearchForm = ({ setKeyword }: SearchFormProps) => {
+const SearchForm = ({ setFood }: SearchFormProps) => {
   const { register, handleSubmit } = useForm<SearchFormValues>();
-
-  const updateKeyword = ({ keyword }: SearchFormValues) => {
-    setKeyword(keyword);
+  
+  const updateFood = ({ food }: SearchFormValues) => {
+    setFood(food);
   };
 
   return (
     <form
       style={{ display: "flex", flexDirection: "column" }}
-      onSubmit={handleSubmit(updateKeyword)}
+      onSubmit={handleSubmit(updateFood)}
     >
       <TextField
-        helperText={`Please enter the name of the food 
-        that will be served with beer, for example: 'spicy', or 'cake'.`}
-        placeholder="keyword"
-        sx={{ my: ".5rem", display: "flex", justifyContent: "center", mx: "auto" }}
-        {...register("keyword", { required: true })}
+        helperText={
+          <p style={{textAlign: "center"}}>
+            Please enter the name of the food that will be served with beer,
+            for example: 'spicy', or 'cake'.
+            <br />
+            If you log in, you can make a selection based on other parameters.
+          </p>
+        }
+        placeholder="food"
+        sx={{
+          my: "1rem",
+          display: "flex",
+          mx: "auto",
+        }}
+        {...register("food", { required: true })}
       />
       <Button
         variant="contained"
         type="submit"
         sx={[
-          { display: "block", mx: "auto", mb: ".5rem", bgcolor: "success.main" },
           {
-            '&:hover': { bgcolor: "success.dark"}
+            display: "block",
+            mx: "auto",
+            mb: ".5rem",
+            bgcolor: "success.main",
+          },
+          {
+            "&:hover": { bgcolor: "success.dark" },
           },
         ]}
       >

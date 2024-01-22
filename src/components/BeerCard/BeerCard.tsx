@@ -1,21 +1,20 @@
 import React from "react";
 import { ListItem, List, ListItemText } from "@mui/material";
-import './BeerCard.css'
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { orange, brown, yellow, deepOrange } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { styled } from "@mui/material/styles";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import Collapse from "@mui/material/Collapse";
+import Avatar from "@mui/material/Avatar";
+import IconButton, { IconButtonProps } from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import { orange, brown, yellow, deepOrange } from "@mui/material/colors";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShareIcon from "@mui/icons-material/Share";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 interface MaltObj {
   name: string;
@@ -28,9 +27,9 @@ interface MaltObj {
 interface HopsObj {
   name: string;
   amount: {
-  value: string;
-  unit: string;
-};
+    value: string;
+    unit: string;
+  };
   add: string;
   attribute: string;
 }
@@ -45,6 +44,7 @@ interface BeerObj {
   description: string;
   image_url: string;
   first_brewed: string;
+  ibu: number;
   abv: number;
   tagline: string;
   brewers_tips: string;
@@ -54,12 +54,18 @@ interface BeerObj {
     hops: HopsObj[];
     yeast: string;
   };
-  boil_volume: object;
-  volume: object;
+  boil_volume: {
+    value: number;
+    unit: string;
+  };
+  volume: {
+    value: number;
+    unit: string;
+  };
   method: {
     fermentation: {
-    temp: TempObj;
-    duration: number;
+      temp: TempObj;
+      duration: number;
     };
     mash_temp: {
       temp: TempObj;
@@ -83,9 +89,9 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
   const { expand, ...other } = props;
   return <IconButton {...other} />;
 })(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
     duration: theme.transitions.duration.shortest,
   }),
 }));
@@ -123,7 +129,7 @@ const BeerCard = ({ beer }: BeerCardProps) => {
   }
 
   return (
-    <ListItem >
+    <ListItem sx={{ justifyContent: "space-evenly" }}>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
           avatar={
@@ -151,6 +157,11 @@ const BeerCard = ({ beer }: BeerCardProps) => {
           height="194"
           image={beer.image_url}
           alt={beer.name}
+          sx={{
+            transform: "rotate(90deg) translate(-0%, -65%) scale(1.5)",
+            maxHeight: "fit-content",
+            maxWidth: "fit-content",
+          }}
         />
         <CardContent>
           <Typography variant="body2" color="text.secondary">
@@ -175,46 +186,59 @@ const BeerCard = ({ beer }: BeerCardProps) => {
         </CardActions>
         <Collapse in={expanded} timeout="auto" unmountOnExit>
           <CardContent>
-            <Typography paragraph>
+            <Typography paragraph variant="subtitle2">
               Food pairing:{" "}
               {beer.food_pairing.map((item) => {
-                return <li>{item};</li>;
+                return <Typography variant="body2">{item};</Typography>;
               })}
             </Typography>
-            <Typography paragraph>First brewed {beer.first_brewed}</Typography>
-            <Typography>
-              Boil volume: {Object.values(beer.boil_volume)};
+            <Typography paragraph variant="subtitle2">
+              First brewed {beer.first_brewed}
             </Typography>
-            <Typography paragraph>
-              Resulting volume: {Object.values(beer.volume)};
+            <Typography variant="body2">Bitterness {beer.ibu} IBU</Typography>
+            <Typography variant="body2">
+              Boil volume: {beer.boil_volume.value} {beer.boil_volume.unit};
             </Typography>
-            <Typography paragraph>
+            <Typography paragraph variant="body2">
+              Resulting volume: {beer.volume.value} {beer.volume.unit};
+            </Typography>
+            <Typography paragraph variant="subtitle2">
               Ingredients:
               <li>
                 Malt:{" "}
                 {beer.ingredients.malt.map((item) => {
                   return (
-                    <Typography>
+                    <Typography variant="body2">
                       {item.name} - {item.amount.value} kilograms;
                     </Typography>
                   );
                 })}
               </li>
               <li>
-                Hops: {beer.ingredients.hops[0].name} -{" "}
-                {beer.ingredients.hops[0].amount.value} grams at{" "}
-                {beer.ingredients.hops[0].add} for{" "}
-                {beer.ingredients.hops[0].attribute};
+                Hops:{" "}
+                {beer.ingredients.hops.map((item) => {
+                  return (
+                    <Typography variant="body2">
+                      {item.name} - {item.amount.value} grams at {item.add} for{" "}
+                      {item.attribute};
+                    </Typography>
+                  );
+                })}
               </li>
-              <li>Yest: {beer.ingredients.yeast}</li>
+              <li>
+                Yest:
+                <Typography variant="body2">
+                  {beer.ingredients.yeast}
+                </Typography>
+              </li>
             </Typography>
-            <Typography paragraph>
+            <Typography paragraph variant="subtitle2">
               Method:
               <li>
                 Mash temperature:{" "}
                 {beer.method.mash_temp.map((item) => {
                   return (
-                    <Typography>
+                    <Typography variant="body2">
                       {item.temp.value} degrees Celsius for {item.duration}{" "}
                       minutes;
                     </Typography>
@@ -222,13 +246,22 @@ const BeerCard = ({ beer }: BeerCardProps) => {
                 })}
               </li>
               <li>
-                Fermentation temperature: {beer.method.fermentation.temp.value}{" "}
-                degrees Celsius;
+                Fermentation temperature:
+                <Typography variant="body2">
+                  {beer.method.fermentation.temp.value} degrees Celsius;
+                </Typography>
               </li>
-              {beer.method.twist ? <li>Twist: {beer.method.twist}.</li> : null}
+              {beer.method.twist ? (
+                <li>
+                  Twist:{" "}
+                  <Typography variant="body2">{beer.method.twist}.</Typography>
+                </li>
+              ) : null}
             </Typography>
-            <Typography>Brewers tips:</Typography>
-            <Typography paragraph>{beer.brewers_tips}</Typography>
+            <Typography variant="subtitle2">Brewers tips:</Typography>
+            <Typography paragraph variant="body2">
+              {beer.brewers_tips}
+            </Typography>
           </CardContent>
         </Collapse>
       </Card>

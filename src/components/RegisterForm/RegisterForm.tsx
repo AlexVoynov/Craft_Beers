@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { auth } from "../../helpers/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { getAuth, updateProfile } from "firebase/auth";
+import LoginPage from "../LoginPage/LoginPage";
 
 interface RegisterFormValues {
   email: string;
@@ -11,7 +12,17 @@ interface RegisterFormValues {
   name: string;
 }
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+  loggedIn: boolean;
+  src: string;
+  setNewProfilePhoto: (value: File) => void;
+}
+
+const RegisterForm = ({
+  loggedIn,
+  src,
+  setNewProfilePhoto,
+}: RegisterFormProps) => {
   const { register, handleSubmit } = useForm<RegisterFormValues>();
 
   const registerUserWithFormData = ({
@@ -31,7 +42,7 @@ const RegisterForm = () => {
                 displayName: name,
               })
                 .then(() => {
-                  alert("Profile updated!");
+                  alert("You have successfully registered on our website!");
                 })
                 .catch((error) => {
                   alert(`Failed to update user info, ${error.message}`);
@@ -49,54 +60,68 @@ const RegisterForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(registerUserWithFormData)}
-      style={{ display: "flex", flexDirection: "column" }}
-    >
-      <Typography
-        align="center"
-        color="text.secondary"
-        sx={{ fontSize: 14, mt: "1rem" }}
-        gutterBottom
-      >
-        Register new account
-      </Typography>
-      <TextField
-        variant="standard"
-        type="name"
-        label="name"
-        placeholder="name"
-        sx={{ display: "block", mx: "auto", my: ".5rem" }}
-        {...register("name", { required: true })}
-      />
-      <TextField
-        variant="standard"
-        type="email"
-        label="email"
-        placeholder="email"
-        sx={{ display: "block", mx: "auto", my: ".5rem" }}
-        {...register("email", { required: true })}
-      />
-      <TextField
-        variant="standard"
-        type="password"
-        label="password"
-        placeholder="password"
-        sx={{ display: "block", mx: "auto", my: ".5rem" }}
-        {...register("password", { required: true })}
-      />
-      <TextField
-        variant="standard"
-        type="password"
-        label="repeat password"
-        placeholder="repeat password"
-        sx={{ display: "block", mx: "auto", my: ".5rem" }}
-        {...register("password2", { required: true })}
-      />
-      <Button size="small" type="submit" sx={{ display: "block", mx: "auto" }}>
-        Register
-      </Button>
-    </form>
+    <>
+      {auth.currentUser ? (
+        <LoginPage
+          setNewProfilePhoto={setNewProfilePhoto}
+          src={src}
+          loggedIn={loggedIn}
+        />
+      ) : (
+        <form
+          onSubmit={handleSubmit(registerUserWithFormData)}
+          style={{ display: "flex", flexDirection: "column" }}
+        >
+          <Typography
+            align="center"
+            color="text.secondary"
+            sx={{ fontSize: 14, mt: "1rem" }}
+            gutterBottom
+          >
+            Register new account
+          </Typography>
+          <TextField
+            variant="standard"
+            type="name"
+            label="name"
+            placeholder="name"
+            sx={{ display: "block", mx: "auto", my: ".5rem" }}
+            {...register("name", { required: true })}
+          />
+          <TextField
+            variant="standard"
+            type="email"
+            label="email"
+            placeholder="email"
+            sx={{ display: "block", mx: "auto", my: ".5rem" }}
+            {...register("email", { required: true })}
+          />
+          <TextField
+            variant="standard"
+            type="password"
+            label="password"
+            placeholder="password"
+            sx={{ display: "block", mx: "auto", my: ".5rem" }}
+            {...register("password", { required: true })}
+          />
+          <TextField
+            variant="standard"
+            type="password"
+            label="repeat password"
+            placeholder="repeat password"
+            sx={{ display: "block", mx: "auto", my: ".5rem" }}
+            {...register("password2", { required: true })}
+          />
+          <Button
+            size="small"
+            type="submit"
+            sx={{ display: "block", mx: "auto" }}
+          >
+            Register
+          </Button>
+        </form>
+      )}
+    </>
   );
 };
 

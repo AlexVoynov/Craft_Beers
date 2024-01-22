@@ -7,17 +7,23 @@ interface ProfilePhotoFormValues {
   profilePhoto: FileList;
 }
 
-const ProfilePhotoForm = () => {
+interface ProfilePhotoFormProps {
+  setNewProfilePhoto: (value: File) => void;
+}
+
+const ProfilePhotoForm = ({ setNewProfilePhoto }: ProfilePhotoFormProps ) => {
   const { register, handleSubmit } = useForm<ProfilePhotoFormValues>();
 
   const uploadPhoto = (data: ProfilePhotoFormValues) => {
     const photo = data.profilePhoto[0];
+    
     if (auth.currentUser) {
       const storageRef = ref(storage, `/users/${auth.currentUser.uid}/profile`);
-      uploadBytes(storageRef, photo);
+      uploadBytes(storageRef, photo)
+      .then(() => setNewProfilePhoto(photo))
     }
   };
-  
+
   return (
     <form onSubmit={handleSubmit(uploadPhoto)}>
       <Typography
@@ -27,7 +33,7 @@ const ProfilePhotoForm = () => {
             xs: "column",
             sm: "row",
             md: "row",
-            xl: "column",
+            lg: "row",
           },
           alignItems: "start",
           justifyItems: "start",
@@ -43,14 +49,6 @@ const ProfilePhotoForm = () => {
           />
         </Button>
         <Button type="submit" size="small" sx={{ ml: "1rem" }}>
-          Send photo
-        </Button>
-        <Button
-          component="a"
-          href=""
-          size="small"
-          sx={{ ml: "1rem" }}
-        >
           Upload photo
         </Button>
       </Typography>

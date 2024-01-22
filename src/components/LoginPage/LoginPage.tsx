@@ -9,9 +9,10 @@ import UserPage from "../UserPage/UserPage";
 interface LoginPageProps {
   loggedIn: boolean;
   src: string;
+  setNewProfilePhoto: (value: File) => void;
 }
 
-const LoginPage = ({loggedIn, src}: LoginPageProps) => {
+const LoginPage = ({ loggedIn, src, setNewProfilePhoto }: LoginPageProps) => {
   return (
     <>
       {!loggedIn ? (
@@ -44,7 +45,11 @@ const LoginPage = ({loggedIn, src}: LoginPageProps) => {
           </CardActions>
         </Card>
       ) : (
-        <UserPage src={src} loggedIn={loggedIn} />
+        <UserPage
+          setNewProfilePhoto={setNewProfilePhoto}
+          src={src}
+          loggedIn={loggedIn}
+        />
       )}
     </>
   );

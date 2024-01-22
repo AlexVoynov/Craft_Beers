@@ -24,6 +24,8 @@ function App() {
 
   const [profilePhoto, setProfilePhoto] = useState<string>("/");
 
+  const [newProfilePhoto, setNewProfilePhoto] = useState<File>();
+
   useEffect(() => {
     if (loggedIn && auth.currentUser) {
       const storageRef = ref(storage, `/users/${auth.currentUser.uid}/profile`);
@@ -31,7 +33,7 @@ function App() {
         setProfilePhoto(url);
       });
     }
-  }, [loggedIn]);
+  }, [loggedIn, newProfilePhoto]);
 
   return (
     <div className="App">
@@ -39,16 +41,37 @@ function App() {
         <Navbar loggedIn={loggedIn} profilePhoto={profilePhoto} />
         <Routes>
           <Route path="" element={<HomePage />} />
-          <Route path="/register" element={<RegisterForm />} />
+          <Route
+            path="/register"
+            element={
+              <RegisterForm
+                setNewProfilePhoto={setNewProfilePhoto}
+                src={profilePhoto}
+                loggedIn={loggedIn}
+              />
+            }
+          />
           <Route
             path="/login"
-            element={<LoginPage src={profilePhoto} loggedIn={loggedIn} />}
+            element={
+              <LoginPage
+                setNewProfilePhoto={setNewProfilePhoto}
+                src={profilePhoto}
+                loggedIn={loggedIn}
+              />
+            }
           />
           <Route
             path="/user"
-            element={<UserPage src={profilePhoto} loggedIn={loggedIn} />}
+            element={
+              <UserPage
+                setNewProfilePhoto={setNewProfilePhoto}
+                src={profilePhoto}
+                loggedIn={loggedIn}
+              />
+            }
           />
-          <Route path="/search" element={<SearchPage />} />
+          <Route path="/search" element={<SearchPage loggedIn={loggedIn} />} />
         </Routes>
       </BrowserRouter>
     </div>
