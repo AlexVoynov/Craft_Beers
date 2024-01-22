@@ -153,26 +153,12 @@ const BeerCard = ({ beer }: BeerCardProps) => {
           title={beer.name}
           subheader={`${beer.tagline}`}
         />
-        {/* <CardMedia
-          component="img"
-          height="194"
-          image={beer.image_url}
-          alt={beer.name}
-          sx={{
-            transform: "rotate(90deg) translate(-0%, -65%) scale(1.5)",
-            maxHeight: "fit-content",
-            maxWidth: "fit-content",
-          }}
-        /> */}
         <img
           src={beer.image_url}
-          alt={beer.name}
+          // alt={beer.name}
           style={{
-            border: "1px solid red",
             height: "12em",
             transform: "rotate(90deg) translate(-0%, -65%) scale(1.5)",
-            // maxHeight: "fit-content",
-            // maxWidth: "fit-content",
           }}
         />
         <CardContent>
