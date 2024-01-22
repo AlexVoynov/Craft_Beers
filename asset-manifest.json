@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Craft_Beers/static/css/main.31d6cfe0.css",
-    "main.js": "/Craft_Beers/static/js/main.fa5e6615.js",
+    "main.js": "/Craft_Beers/static/js/main.f8b7ddff.js",
     "static/js/787.ea2731db.chunk.js": "/Craft_Beers/static/js/787.ea2731db.chunk.js",
     "index.html": "/Craft_Beers/index.html",
-    "main.fa5e6615.js.map": "/Craft_Beers/static/js/main.fa5e6615.js.map",
+    "main.f8b7ddff.js.map": "/Craft_Beers/static/js/main.f8b7ddff.js.map",
     "787.ea2731db.chunk.js.map": "/Craft_Beers/static/js/787.ea2731db.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.31d6cfe0.css",
-    "static/js/main.fa5e6615.js"
+    "static/js/main.f8b7ddff.js"
   ]
 }
