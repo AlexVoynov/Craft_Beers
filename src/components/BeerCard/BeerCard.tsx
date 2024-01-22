@@ -168,10 +168,11 @@ const BeerCard = ({ beer }: BeerCardProps) => {
           src={beer.image_url}
           alt={beer.name}
           style={{
-            height: "11em",
+            border: "1px solid red",
+            height: "12em",
             transform: "rotate(90deg) translate(-0%, -65%) scale(1.5)",
-            maxHeight: "fit-content",
-            maxWidth: "fit-content",
+            // maxHeight: "fit-content",
+            // maxWidth: "fit-content",
           }}
         />
         <CardContent>
