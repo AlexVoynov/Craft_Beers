@@ -40,6 +40,7 @@ interface TempObj {
 }
 
 interface BeerObj {
+  id: number;
   name: string;
   description: string;
   image_url: string;
@@ -129,7 +130,7 @@ const BeerCard = ({ beer }: BeerCardProps) => {
   }
 
   return (
-    <ListItem sx={{ justifyContent: "space-evenly" }}>
+    <ListItem key={beer.id} sx={{ justifyContent: "space-evenly" }}>
       <Card sx={{ maxWidth: 345 }}>
         <CardHeader
           avatar={
@@ -152,12 +153,22 @@ const BeerCard = ({ beer }: BeerCardProps) => {
           title={beer.name}
           subheader={`${beer.tagline}`}
         />
-        <CardMedia
+        {/* <CardMedia
           component="img"
           height="194"
           image={beer.image_url}
           alt={beer.name}
           sx={{
+            transform: "rotate(90deg) translate(-0%, -65%) scale(1.5)",
+            maxHeight: "fit-content",
+            maxWidth: "fit-content",
+          }}
+        /> */}
+        <img
+          src={beer.image_url}
+          alt={beer.name}
+          style={{
+            height: "11em",
             transform: "rotate(90deg) translate(-0%, -65%) scale(1.5)",
             maxHeight: "fit-content",
             maxWidth: "fit-content",
