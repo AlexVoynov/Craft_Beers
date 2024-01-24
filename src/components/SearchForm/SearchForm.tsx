@@ -25,7 +25,7 @@ const SearchForm = ({ setFood }: SearchFormProps) => {
         helperText={
           <p style={{textAlign: "center"}}>
             Please enter the name of the food that will be served with beer,
-            for example: 'spicy', or 'cake'.
+            for example: 'pie', or 'lemon'.
             <br />
             If you log in, you can make a selection based on other parameters.
           </p>

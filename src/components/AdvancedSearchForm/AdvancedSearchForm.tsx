@@ -66,7 +66,7 @@ const AdvancedSearchForm = ({
         <TextField
           sx={{ mr: ".7rem", my: "1rem" }}
           id="outlined-select-currency"
-          label="Alckochol from"
+          label="Alcohol from"
           defaultValue=""
           helperText="Please enter alcohol content FROM"
           {...register("abv_gt", { required: false })}
@@ -117,7 +117,6 @@ const AdvancedSearchForm = ({
 
       {/* Text field for color intensity */}
       <div style={{ display: "flex", justifyContent: "center" }}>
-        
         <TextField
           sx={{ mr: ".7rem", my: "1rem" }}
           id="outlined-select-currency"
@@ -135,7 +134,6 @@ const AdvancedSearchForm = ({
           helperText="Please enter color intensity TO"
           {...register("ebc_it", { required: false })}
         ></TextField>
-
       </div>
 
       <Button
