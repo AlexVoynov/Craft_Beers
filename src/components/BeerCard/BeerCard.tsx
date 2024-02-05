@@ -3,7 +3,6 @@ import { ListItem, List, ListItemText } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import CardMedia from "@mui/material/CardMedia";
 import CardContent from "@mui/material/CardContent";
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
@@ -145,11 +144,11 @@ const BeerCard = ({ beer }: BeerCardProps) => {
               {`${beer.abv}%`}
             </Avatar>
           }
-          action={
-            <IconButton aria-label="settings">
-              <MoreVertIcon />
-            </IconButton>
-          }
+          // action={
+          //   <IconButton aria-label="settings">
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
           title={beer.name}
           subheader={`${beer.tagline}`}
         />
@@ -167,12 +166,12 @@ const BeerCard = ({ beer }: BeerCardProps) => {
           </Typography>
         </CardContent>
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites">
+          {/* <IconButton aria-label="add to favorites">
             <FavoriteIcon />
           </IconButton>
           <IconButton aria-label="share">
             <ShareIcon />
-          </IconButton>
+          </IconButton> */}
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
